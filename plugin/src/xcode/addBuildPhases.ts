@@ -1,4 +1,4 @@
-import type { XcodeProject } from "expo/config-plugins";
+import { IOSConfig, type XcodeProject } from "expo/config-plugins";
 import util from "node:util";
 
 export function addBuildPhases(
@@ -75,15 +75,18 @@ export function addBuildPhases(
     buildPath,
   );
 
-  // Resources build phase
-  xcodeProject.addBuildPhase(
-    ["Images.xcassets", "SplashScreen.storyboard", "Supporting/Expo.plist"],
-    "PBXResourcesBuildPhase",
-    groupName,
-    targetUuid,
-    folderType,
-    buildPath,
-  );
+  IOSConfig.XcodeUtils.ensureGroupRecursively(xcodeProject, 'Resources');
+  const files = ["Images.xcassets", "SplashScreen.storyboard", "Supporting/Expo.plist"]
+  for (const file of files) { 
+    IOSConfig.XcodeUtils.addResourceFileToGroup({
+      filepath: file,
+      groupName,
+      isBuildFile: true,
+      project: xcodeProject,
+      verbose: true,
+      targetUuid,
+  })
+  }
 
   // Add shell script build phase
   xcodeProject.addBuildPhase(

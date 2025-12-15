@@ -39,11 +39,7 @@ export function addPbxGroup(
     [
       "AppDelegate.swift",
       "Info.plist",
-      "Images.xcassets",
-      "SplashScreen.storyboard",
-      `${targetName}.entitlements`,
-      "Supporting/Expo.plist",
-      /* "main.jsbundle", */
+      `${targetName}.entitlements`
     ],
     targetName,
     targetName,
