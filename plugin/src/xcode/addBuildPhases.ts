@@ -76,6 +76,17 @@ export function addBuildPhases(
   );
 
   IOSConfig.XcodeUtils.ensureGroupRecursively(xcodeProject, 'Resources');
+
+  // Resources build phase
+  xcodeProject.addBuildPhase(
+    [],
+    "PBXResourcesBuildPhase",
+    groupName,
+    targetUuid,
+    folderType,
+    buildPath,
+  );
+
   const files = ["Images.xcassets", "SplashScreen.storyboard", "Supporting/Expo.plist"]
   for (const file of files) { 
     IOSConfig.XcodeUtils.addResourceFileToGroup({
