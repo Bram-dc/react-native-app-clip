@@ -46,7 +46,7 @@ export const withXcode: ConfigPlugin<{
     addTargetDependency(xcodeProject, target);
 
     addPbxGroup(xcodeProject, {
-      projectName: projectName as string,
+      projectName: projectName,
       targetName,
       platformProjectRoot,
     });
